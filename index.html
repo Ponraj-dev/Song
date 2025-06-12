@@ -3,59 +3,106 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Autoplay Song Website</title>
+  <title>Surprise Gift ❤️</title>
   <style>
     body {
       margin: 0;
       padding: 0;
-      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-      color: white;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       height: 100vh;
-      text-align: center;
+      background: linear-gradient(to bottom, #ff4e50, #f9d423);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
     }
 
     .container {
-      padding: 20px;
+      text-align: center;
       background: rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+      color: white;
+      max-width: 90%;
     }
 
     h1 {
-      font-size: 2.5em;
-      margin-bottom: 10px;
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      color: #fff;
     }
 
     p {
-      font-size: 1.2em;
+      font-size: 1.3rem;
+    }
+
+    .heart {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100px;
+      height: 90px;
+      margin: -45px 0 0 -50px;
+      background: red;
+      transform: rotate(-45deg);
+      animation: pulse 1s infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 100px;
+      height: 90px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -50px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: 50px;
+      top: 0;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1) rotate(-45deg);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.1) rotate(-45deg);
+        opacity: 0.85;
+      }
+      100% {
+        transform: scale(1) rotate(-45deg);
+        opacity: 1;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="heart"></div>
   <div class="container">
-    <h1>🎶 Welcome to MusicLand 🎶</h1>
-    <p>Your song is now playing...</p>
+    <h1>❤️ To My Dearest Sibling ❤️</h1>
+    <p>This page is a surprise gift filled with love and memories...<br/>
+    Close your eyes and listen 🎧</p>
   </div>
 
-  <!-- Audio element -->
-  <audio id="bg-music" src="your-audio-file.mp3" autoplay></audio>
+  <!-- Your audio file must be inside the 'audio' folder -->
+  <audio id="bg-music" src="audio/brother-sister-song.mp3" autoplay loop></audio>
 
   <script>
-    // Handle autoplay restrictions in some browsers
-    window.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener('load', () => {
       const audio = document.getElementById('bg-music');
       const playPromise = audio.play();
-
       if (playPromise !== undefined) {
-        playPromise.then(() => {
-          console.log("Audio started playing.");
-        }).catch(error => {
-          console.warn("Autoplay failed. Muting and retrying...");
-          audio.muted = true;
+        playPromise.catch(() => {
+          alert("Click OK to start the surprise music 🎵");
           audio.play();
         });
       }
