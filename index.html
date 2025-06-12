@@ -1,71 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Surprise Gift ❤️</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For My Wonderful Sibling ❤️</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap');
+    
     body {
       margin: 0;
       padding: 0;
       height: 100vh;
-      background: linear-gradient(to bottom, #ff4e50, #f9d423);
+      background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Montserrat', sans-serif;
       overflow: hidden;
+      position: relative;
     }
 
     .container {
       text-align: center;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
-      padding: 2rem;
-      box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
-      color: white;
-      max-width: 90%;
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(8px);
+      border-radius: 25px;
+      padding: 3rem;
+      box-shadow: 0 15px 35px rgba(216, 91, 112, 0.3);
+      color: #5a0e24;
+      max-width: 80%;
+      z-index: 10;
+      border: 2px solid rgba(255, 255, 255, 0.3);
     }
 
     h1 {
-      font-size: 2.8rem;
-      margin-bottom: 1rem;
-      color: #fff;
+      font-family: 'Dancing Script', cursive;
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+      color: #d85b70;
+      text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
     }
 
     p {
-      font-size: 1.3rem;
+      font-size: 1.4rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
     }
 
+    /* Main heart animation */
     .heart {
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 100px;
-      height: 90px;
-      margin: -45px 0 0 -50px;
-      background: red;
+      width: 120px;
+      height: 108px;
+      margin: -54px 0 0 -60px;
+      background: #d85b70;
       transform: rotate(-45deg);
-      animation: pulse 1s infinite;
+      animation: pulse 1.2s infinite;
+      z-index: 1;
+      box-shadow: 0 0 50px #ff2d52;
     }
 
     .heart::before,
     .heart::after {
       content: "";
       position: absolute;
-      width: 100px;
-      height: 90px;
-      background: red;
+      width: 120px;
+      height: 108px;
+      background: #d85b70;
       border-radius: 50%;
     }
 
     .heart::before {
-      top: -50px;
+      top: -60px;
       left: 0;
     }
 
     .heart::after {
-      left: 50px;
+      left: 60px;
+      top: 0;
+    }
+
+    /* Floating hearts */
+    .floating-hearts {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .floating-heart {
+      position: absolute;
+      width: 24px;
+      height: 22px;
+      background: rgba(216, 91, 112, 0.7);
+      transform: rotate(-45deg);
+      opacity: 0;
+      filter: drop-shadow(0 0 5px rgba(216, 91, 112, 0.5));
+    }
+
+    .floating-heart::before,
+    .floating-heart::after {
+      content: "";
+      position: absolute;
+      width: 24px;
+      height: 22px;
+      background: rgba(216, 91, 112, 0.7);
+      border-radius: 50%;
+    }
+
+    .floating-heart::before {
+      top: -12px;
+      left: 0;
+    }
+
+    .floating-heart::after {
+      left: 12px;
       top: 0;
     }
 
@@ -75,35 +129,179 @@
         opacity: 1;
       }
       50% {
-        transform: scale(1.1) rotate(-45deg);
-        opacity: 0.85;
+        transform: scale(1.2) rotate(-45deg);
+        opacity: 0.9;
       }
       100% {
         transform: scale(1) rotate(-45deg);
         opacity: 1;
       }
     }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(-45deg) scale(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.7;
+        transform: translateY(0) rotate(-45deg) scale(1);
+      }
+      100% {
+        transform: translateY(-100vh) rotate(-45deg) scale(0.5);
+        opacity: 0;
+      }
+    }
+
+    .play-btn {
+      background: rgba(216, 91, 112, 0.7);
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+      margin-top: 1rem;
+      font-weight: 600;
+      box-shadow: 0 5px 15px rgba(216, 91, 112, 0.4);
+    }
+
+    .play-btn:hover {
+      background: rgba(216, 91, 112, 0.9);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(216, 91, 112, 0.6);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .message {
+      font-style: italic;
+      margin-top: 2rem;
+      font-size: 1.2rem;
+      color: #7a1c3a;
+    }
+
+    /* Sparkle effects */
+    .sparkle {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 5;
+    }
   </style>
 </head>
 <body>
   <div class="heart"></div>
+  <div class="floating-hearts" id="floatingHearts"></div>
+  
   <div class="container">
-    <h1>❤️ To My Dearest Sibling ❤️</h1>
-    <p>This page is a surprise gift filled with love and memories...<br/>
-    Close your eyes and listen 🎧</p>
+    <h1>To My Dearest Sibling</h1>
+    <p>No matter where life takes us,<br>
+    you'll always be my favorite hello<br>
+    and my hardest goodbye.</p>
+    
+    <button class="play-btn" id="playBtn">Play Our Song</button>
+    <p class="hidden" id="listenText">Listen to our special song 🎵</p>
+    <p class="message">Made with love ❤️</p>
   </div>
 
-  <!-- Your audio file must be inside the 'audio' folder -->
-  <audio id="bg-music" src="audio/brother-sister-song.mp3" autoplay loop></audio>
+  <!-- Audio file - make sure to add your sibling song in the audio folder -->
+  <audio id="bg-music" src="audio/sibling-song.mp3" loop></audio>
 
   <script>
     window.addEventListener('load', () => {
       const audio = document.getElementById('bg-music');
+      const playBtn = document.getElementById('playBtn');
+      const listenText = document.getElementById('listenText');
+      
+      // Create floating hearts
+      const floatingHearts = document.getElementById('floatingHearts');
+      
+      function createFloatingHeart() {
+        const heart = document.createElement('div');
+        heart.classList.add('floating-heart');
+        
+        // Random position
+        const leftPos = Math.random() * 100;
+        heart.style.left = `${leftPos}%`;
+        heart.style.bottom = '-20px';
+        
+        // Random size
+        const size = Math.random() * 25 + 15;
+        heart.style.width = `${size}px`;
+        heart.style.height = `${size * 0.9}px`;
+        
+        // Random animation duration
+        const duration = Math.random() * 10 + 10;
+        heart.style.animation = `float ${duration}s linear forwards`;
+        
+        floatingHearts.appendChild(heart);
+        
+        // Remove heart after animation completes
+        setTimeout(() => {
+          heart.remove();
+        }, duration * 1000);
+      }
+      
+      // Create hearts periodically
+      setInterval(createFloatingHeart, 300);
+      
+      // Create sparkle effects
+      function createSparkle(e) {
+        const sparkle = document.createElement('div');
+        sparkle.classList.add('sparkle');
+        
+        const size = Math.random() * 10 + 5;
+        sparkle.style.width = `${size}px`;
+        sparkle.style.height = `${size}px`;
+        
+        sparkle.style.left = `${e.clientX}px`;
+        sparkle.style.top = `${e.clientY}px`;
+        
+        document.body.appendChild(sparkle);
+        
+        // Animate sparkle
+        sparkle.animate([
+          { transform: 'scale(1)', opacity: 1 },
+          { transform: 'scale(2)', opacity: 0 }
+        ], {
+          duration: 500,
+          easing: 'ease-out'
+        });
+        
+        // Remove sparkle after animation
+        setTimeout(() => {
+          sparkle.remove();
+        }, 500);
+      }
+      
+      // Add sparkle effect on click
+      document.addEventListener('click', createSparkle);
+      
+      // Handle audio play
+      playBtn.addEventListener('click', (e) => {
+        createSparkle(e);
+        audio.play()
+          .then(() => {
+            playBtn.classList.add('hidden');
+            listenText.classList.remove('hidden');
+          })
+          .catch(error => {
+            alert("Please allow audio to play for the full experience!");
+          });
+      });
+      
+      // Try autoplay with fallback
       const playPromise = audio.play();
       if (playPromise !== undefined) {
         playPromise.catch(() => {
-          alert("Click OK to start the surprise music 🎵");
-          audio.play();
+          // Show play button if autoplay fails
+          playBtn.classList.remove('hidden');
         });
       }
     });
